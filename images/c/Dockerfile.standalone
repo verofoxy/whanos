@@ -1,0 +1,9 @@
+FROM whanos-c
+
+SHELL [ "/bin/bash", "-c" ]
+
+COPY . /app
+
+RUN make
+
+CMD [./compiled-app]

@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+   name: js-node-deployment
+ spec:
+   replicas: 1
+   selector:
+     matchLabels:
+       app: jsnode
+   template:
+     metadata:
+       labels:
+         app: jsnode
+     spec:
+       containers:
+       - name: jsnode

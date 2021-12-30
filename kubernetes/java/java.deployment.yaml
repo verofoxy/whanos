@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+   name: java-node-deployment
+ spec:
+   replicas: 1
+   selector:
+     matchLabels:
+       app: javanode
+   template:
+     metadata:
+       labels:
+         app: javanode
+     spec:
+       containers:
+       - name: javanode

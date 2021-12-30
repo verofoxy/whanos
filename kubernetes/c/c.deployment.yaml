@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+   name: c-node-deployment
+ spec:
+   replicas: 1
+   selector:
+     matchLabels:
+       app: cnode
+   template:
+     metadata:
+       labels:
+         app: cnode
+     spec:
+       containers:
+       - name: cnode

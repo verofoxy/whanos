@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+   name: python-node-deployment
+ spec:
+   replicas: 1
+   selector:
+     matchLabels:
+       app: pythonnode
+   template:
+     metadata:
+       labels:
+         app: pythonnode
+     spec:
+       containers:
+       - name: pythonnode

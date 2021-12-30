@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whanos-deployment
+  labels:
+     app: whanos
+     type: front-end
+spec:
+  template:
+     metadata:
+       name: whanos-pod
+       labels: 
+         app: whanos
+         type: front-end
+     spec:
+         containers:
+           - name: whanos-img
+             image: "whanos/img:1.0"
+  replicas: 1
+  selector:
+    matchLabels:
+      type: front-end
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whanos-service
+spec:
+  selector:
+    app: whanos
+  type: LoadBalancer  
+  ports:
+    - protocol: TCP
+      targetPort: 3000
+      port: 80
+      nodePort: 30000

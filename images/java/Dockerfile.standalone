@@ -1,0 +1,7 @@
+FROM whanos-java
+
+RUN mvn package
+
+RUN mv target/app.jar ./app.jar
+
+CMD ["java", "-jar", "app.jar"]

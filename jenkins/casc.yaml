@@ -1,0 +1,49 @@
+jenkins:
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+       - id: ${JENKINS_ADMIN_ID}
+         password: ${JENKINS_ADMIN_PASSWORD}
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "Overall/Administer:admin"
+        - "Overall/Read:authenticated"
+  remotingSecurity:
+    enabled: true
+
+security:
+  queueItemAuthenticator:
+    authenticators:
+    - global:
+        strategy: triggeringUsersAuthorizationStrategy
+
+unclassified:
+  location:
+    url: http://localhost:8081/
+
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - usernamePassword:
+          scope: GLOBAL
+          id: docker-hub
+          description: docker-hub
+          username: anthonimarie
+          password: ${CREDENTIALS_USER_PASSWORD}
+
+jobs:
+  - file: /var/jenkins_home/folder.dsl
+
+  - file: /var/jenkins_home/whanos-c.dsl
+  - file: /var/jenkins_home/whanos-java.dsl
+  - file: /var/jenkins_home/whanos-javascript.dsl
+  - file: /var/jenkins_home/whanos-python.dsl
+  - file: /var/jenkins_home/whanos-befunge.dsl
+  
+  - file: /var/jenkins_home/build-all-base-images.dsl
+
+  - file : /var/jenkins_home/link-project.dsl
+  

@@ -1,0 +1,11 @@
+FROM maven:3.8.4-openjdk-17
+
+SHELL [ "/bin/bash" , "-c"]
+
+WORKDIR /app
+
+ONBUILD COPY ./app .
+ 
+ONBUILD RUN mvn package
+
+CMD ["java", "-jar", "app.jar"]
